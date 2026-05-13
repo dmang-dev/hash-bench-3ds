@@ -1,0 +1,39 @@
+Reference digests for the 20 algorithms in hash-bench-nds.
+
+Workload buffer: buf[i] = (i * 31 + 7) & 0xFF for i in [0, 1024).
+HMAC-SHA256 key: ASCII "hash-bench-nds" + two zero bytes (16 bytes total).
+SipHash-2-4 key: bytes 0x00..0x0F (the standard self-test key).
+xxHash64 / xxHash32 seed: 0.
+
+Non-cryptographic
+  CRC-8       DD
+  CRC-16      F009
+  CRC-32      7C321B5D
+  Adler-32    13D3FE10
+  DJB2        358B5305
+  FNV-1a      2C6D0DC5
+  Pearson-8   A0
+  Murmur3-32  56530DF1
+  xxHash32    (verified by host-compile against published xxHash spec)
+  xxHash64    149AA44972CDAE00              (in C: stored little-endian -> 00AECD7249A49A14)
+  SipHash-2-4 12AB28BE1797B5D6              (in C: stored little-endian -> D6B59717BE28AB12)
+
+Cryptographic
+  MD4         A2909A641975A5CB590984B5323BB03B
+  MD5         63B2177A7AF739B5CC52AB1D1C714702
+  RIPEMD-160  21D1D63F50CDF5CACD90D8B323D22D0E7EAB00D2
+  SHA-1       B66786CDE756750241D1F0EAB86CE6F81855B017
+  SHA-256     8D7E566766F6BD1BB4CAC87CADFDE681197F9243F4D2692A0FD12674092212A7
+  SHA-3-256   D925394CF5841554B9FC100363BD6EB55E69CD166C164C11EE5F699F181219BD
+  BLAKE2s     AD41D5E917BE8E9CD95975E72CF44E118268294566BD95D7FCEB3D23D200EDC8
+  SHA-512     076291378444AC54F7E7AC5717C498F169218B3BA608D08A3FA63E56063C4A9E
+              0E26EA6FC82654B79AADB9E70AE90D5401DE36A0DF9B4B2DD046B7BAD4E4DA32
+  HMAC-SHA256 CE139393FFB45956D62726B112E7F34C538104578DB59F75B564F1AF764BB3BD
+
+The on-screen "HASH" column shows the first 4 hex bytes (8 chars) of
+the digest. If those don't match the leading bytes of the values
+above, something is wrong with the build or the workload buffer.
+
+Cross-validation: tests/verify.c compiles each .c under the host gcc
+and prints the same digests for direct comparison; see the header
+comment for the build command.
