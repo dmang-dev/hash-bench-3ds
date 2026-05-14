@@ -1,5 +1,9 @@
 # hash-bench-3ds
 
+> Part of the **[hash-bench](https://github.com/dmang-dev/hash-bench)**
+> cross-platform suite — the same hash-algorithm sources timed natively
+> on seven Nintendo consoles (NES · GB/GBC · GBA · NDS · DSi · 3DS · N64).
+
 Native **Nintendo 3DS / 2DS / New 3DS** hashing-algorithm benchmark —
 **32 algorithms** running on the ARM11 MPCore application processor
 through libctru, with cycle-accurate timing via `svcGetSystemTick()`.
